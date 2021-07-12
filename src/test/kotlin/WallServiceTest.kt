@@ -1,6 +1,7 @@
 import org.junit.Test
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
+
 class WallServiceTest {
     @Test
     fun add() {
@@ -21,6 +22,7 @@ class WallServiceTest {
         val result = service.update(updatePost)
         assertTrue(result)
     }
+
     @Test
     fun updateNotExisting() {
         val service = WallService()
@@ -28,8 +30,10 @@ class WallServiceTest {
         service.add(Post(text = "Второе сообщение"))
         service.add(Post(text = "Третье сообщение"))
 
-        val updatePost = Post(7, text = "Второе сообщение обновлено", createdBy = null, replyOwnerId = null,
-            replyPostId = null, signerId = null, )
+        val updatePost = Post(
+            7, text = "Второе сообщение обновлено", createdBy = null, replyOwnerId = null,
+            replyPostId = null, signerId = null,
+        )
         val result = service.update(updatePost)
         assertTrue(!result)
     }
