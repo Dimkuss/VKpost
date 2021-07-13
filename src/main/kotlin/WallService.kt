@@ -2,9 +2,9 @@ class WallService {
     private var posts = arrayOf<Post>()
 
     fun add(post: Post): Post {
-        posts += post.copy(posts.lastOrNull()?.id ?: 0)
+        posts += if (posts.isEmpty()) post.copy(id = 1)
+        else post.copy(id = posts.last().id + 1)
         return posts.last()
-
     }
 
     fun update(post: Post): Boolean {
@@ -20,4 +20,12 @@ class WallService {
 
     fun getLastPostId(): Int = if (posts.isEmpty()) 0 else posts.last().id
 
+    fun findPostById(id: Int): Post? {
+        for ((index, currentPost) in posts.withIndex()) {
+            if (currentPost.id == id) {
+                return posts[index]
+            }
+        }
+        return null
+    }
 }
