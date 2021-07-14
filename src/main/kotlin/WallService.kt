@@ -1,5 +1,29 @@
 class WallService {
     private var posts = arrayOf<Post>()
+    private var comments = emptyArray<Comment>()
+
+    fun createComment(comment: Comment){
+        for(currentPost in posts){
+            if(currentPost.id == comment.postId){
+                comments += comment
+                return
+            }
+
+        throw PostNotFoundException("Post to comment does not exist")
+        }
+    }
+    fun getPostComments(post: Post): String {
+        var commentsString = ""
+        for (comment in comments) {
+            if (comment.replyToComment == post.id) {
+
+                commentsString += comment.message
+
+            }
+        }
+        return commentsString
+    }
+    class PostNotFoundException(message: String) : RuntimeException(message)
 
     fun add(post: Post): Post {
         posts += if (posts.isEmpty()) post.copy(id = 1)
