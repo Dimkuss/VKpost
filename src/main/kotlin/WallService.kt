@@ -1,3 +1,4 @@
+class PostNotFoundException(message: String) : RuntimeException(message)
 class WallService {
     private var posts = arrayOf<Post>()
     private var comments = emptyArray<Comment>()
@@ -23,7 +24,7 @@ class WallService {
         }
         return commentsString
     }
-    class PostNotFoundException(message: String) : RuntimeException(message)
+
 
     fun add(post: Post): Post {
         posts += if (posts.isEmpty()) post.copy(id = 1)
